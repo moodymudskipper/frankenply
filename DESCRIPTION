@@ -13,3 +13,5 @@ LazyData: true
 RoxygenNote: 7.0.2
 Imports: 
     rlang
+URL: https://github.com/moodymudskipper/frankenply
+BugReports: https://github.com/moodymudskipper/frankenply/issues
