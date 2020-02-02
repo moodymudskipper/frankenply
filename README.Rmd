@@ -1,0 +1,66 @@
+---
+output: github_document
+---
+
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+# frankenply <img src='man/figures/logo.png' align="right" height="139" />
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+> “Learn from me, if not by my precepts, at least by my example, how dangerous is the acquirement of knowledge, and how much happier that man is who believes his native town to be his world, than he who aspires to become greater than his nature will allow.”
+― Mary Shelley, Frankenstein
+
+Install with:
+
+``` r
+remotes::install_github("moodymudskipper/frankenply")
+```
+
+It can be seen as a replacement to apply functions: 
+
+```{r}
+library(frankenply, warn.conflicts = FALSE)
+nrow(?~~list(iris, cars))
+```
+
+And is especially intuitive for rowwise operations, let's see with sample data :
+
+```{r}
+library(dplyr, warn.conflicts = FALSE, quietly = TRUE, verbose = FALSE)
+data <- 
+  mtcars %>%
+  group_by(vs) %>%
+  summarize(disp_hp = list(tibble(disp, hp)),
+            drat_wt = list(tibble(drat, wt)))
+data
+```
+
+Then unleash Franky:
+
+```{r}
+data %>% 
+  transmute( 
+    nrow_disp_hp    = nrow(?~~disp_hp),  
+    disp_hp_head    = head(?~disp_hp, 1), 
+    disp_hp_drat_wt = cbind(?~disp_hp, ?~drat_wt)
+    )
+```
+
+`?~~` on first `transmute()` instruction wraps `mapply()`, so outputs atomic columns whenever possible, integer here.
+
+`?~~` on other `transmute()` instructions wraps `Map()`, so outputs list columns.
+
+
+It's a monster because :
+
+* It modifies the call of the function that calls `?`, which is a monstruous thing to do.
+* It's full of problems, won't work for primitives and some other functions (`lm()` and `dplyr::bind_cols()` break it for instance).
+* To solve these issues I might need to be greater than my nature will allow.
