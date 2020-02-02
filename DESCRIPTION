@@ -1,12 +1,12 @@
 Package: frankenply
-Title: Avoid Using Functionals by Tagging your Arguments Directly in the Function Call
+Title: Avoid Using Functionals by Prefixing your Arguments Directly in the Function Call
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Antoine",
            family = "Fabri",
            role = c("aut", "cre"),
            email = "antoine.fabri@gmail.com.com")
-Description: Avoid using functionals by tagging your arguments directly in the function call.
+Description: Avoid using functionals by Prefixing your arguments directly in the function call.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
