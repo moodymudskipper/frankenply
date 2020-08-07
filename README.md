@@ -62,7 +62,7 @@ data %>%
 `?~~` on first `transmute()` instruction wraps `mapply()`, so outputs
 atomic columns whenever possible, integer here.
 
-`?~~` on other `transmute()` instructions wraps `Map()`, so outputs list
+`?~` on other `transmute()` instructions wraps `Map()`, so outputs list
 columns.
 
 It’s a monster because :
